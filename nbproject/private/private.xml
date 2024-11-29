@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/EIU/water-supply-management/water-supply-management/src/CustomerDetailsDialog.java</file>
+            <file>file:/D:/EIU/water-supply-management/water-supply-management/src/AddEditBillDialog.java</file>
+            <file>file:/D:/EIU/water-supply-management/water-supply-management/src/LoginFrame.java</file>
+            <file>file:/D:/EIU/water-supply-management/water-supply-management/src/ResultSetTableModel.java</file>
+            <file>file:/D:/EIU/water-supply-management/water-supply-management/src/DBConnection.java</file>
+            <file>file:/D:/EIU/water-supply-management/water-supply-management/src/DashboardFrame.java</file>
+        </group>
     </open-files>
 </project-private>
