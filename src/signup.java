@@ -18,14 +18,14 @@ public class signup extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        txtUsername1 = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtUsername2 = new javax.swing.JTextField();
+        txtDob = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtUsername3 = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtUsername4 = new javax.swing.JTextField();
+        txtPhoneNumber = new javax.swing.JTextField();
         btnReset = new javax.swing.JButton();
         btnSignUp = new javax.swing.JButton();
 
