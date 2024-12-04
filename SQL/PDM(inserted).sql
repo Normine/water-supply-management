@@ -16,6 +16,15 @@ CREATE TABLE Customer (
     Address VARCHAR(255)
 
 );
+--Entity: Users
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    Username VARCHAR(255),
+    Password VARCHAR(255),
+    Role VARCHAR(50)
+);
+
 
 -- Entity: Order
 CREATE TABLE Orders (
@@ -168,6 +177,12 @@ INSERT INTO WaterResource_WaterConnection (ResourceID, ConnectionID) VALUES
 (3, 3),
 (4, 4),
 (5, 5);
+INSERT INTO Users (UserID, Username, Password, Role)
+SELECT CustomerID, Name, Password, 'Customer'
+FROM Customer;
+INSERT INTO Users (UserID, Username, Password, Role)
+SELECT SupplierID + 10, Name, Password, 'Supplier'
+FROM Supplier;
 
 --update Cus and Sup
 ALTER TABLE Customer
