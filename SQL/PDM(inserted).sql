@@ -1,27 +1,37 @@
 -- Entity: Supplier
 CREATE TABLE Supplier (
     SupplierID INT PRIMARY KEY,
-    Name VARCHAR,
-    Address VARCHAR,
-    Rating DECIMAL,
-    Email VARCHAR,
-    SupplyType VARCHAR
+    Name VARCHAR(255),
+    Address VARCHAR(255),
+    Rating DECIMAL(3, 2),
+    Email VARCHAR(255),
+    SupplyType VARCHAR(100)
 );
 
 -- Entity: Customer
 CREATE TABLE Customer (
     CustomerID INT PRIMARY KEY,
-    Name VARCHAR,
-    Email VARCHAR,
-    Address VARCHAR
+    Name VARCHAR(255),
+    Email VARCHAR(255),
+    Address VARCHAR(255)
+
 );
+--Entity: Users
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    Username VARCHAR(255),
+    Password VARCHAR(255),
+    Role VARCHAR(50)
+);
+
 
 -- Entity: Order
 CREATE TABLE Orders (
     OrderID INT PRIMARY KEY,
-    Status VARCHAR,
+    Status VARCHAR(50),
     OrderDate DATE,
-	Quantity INT,
+    Quantity INT,
     SupplierID INT,
     CustomerID INT,
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
@@ -31,8 +41,8 @@ CREATE TABLE Orders (
 -- Entity: WaterResource
 CREATE TABLE WaterResource (
     ResourceID INT PRIMARY KEY,
-    Type VARCHAR,
-    Location VARCHAR,
+    Type VARCHAR(100),
+    Location VARCHAR(255),
     Capacity INT,
     OrderID INT,
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
@@ -43,7 +53,7 @@ CREATE TABLE Delivery (
     DeliveryID INT PRIMARY KEY,
     OrderID INT,
     Date DATE,
-    Status VARCHAR,
+    Status VARCHAR(50),
     SupplierID INT,
     FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID),
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
@@ -53,7 +63,7 @@ CREATE TABLE Delivery (
 CREATE TABLE WaterConnection (
     ConnectionID INT PRIMARY KEY,
     Date DATE,
-    Status VARCHAR,
+    Status VARCHAR(50),
     CustomerID INT,
     ResourceID INT,
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
@@ -65,8 +75,8 @@ CREATE TABLE Billing (
     BillingID INT PRIMARY KEY,
     CustomerID INT,
     Date DATE,
-    Amount DECIMAL,
-    PaymentStatus VARCHAR,
+    Amount DECIMAL(10, 2),
+    PaymentStatus VARCHAR(50),
     ConnectionID INT,
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
     FOREIGN KEY (ConnectionID) REFERENCES WaterConnection(ConnectionID)
@@ -98,6 +108,13 @@ CREATE TABLE WaterResource_WaterConnection (
     FOREIGN KEY (ResourceID) REFERENCES WaterResource(ResourceID),
     FOREIGN KEY (ConnectionID) REFERENCES WaterConnection(ConnectionID)
 );
+
+
+ALTER TABLE Billing
+ADD Price DECIMAL(10, 2);
+UPDATE Billing
+SET Price = Amount * 0.95; -- Apply a 5% discount to the Amount
+
 
 -- Insert data
 INSERT INTO Supplier (SupplierID, Name, Address, Rating, Email, SupplyType) VALUES
@@ -160,3 +177,58 @@ INSERT INTO WaterResource_WaterConnection (ResourceID, ConnectionID) VALUES
 (3, 3),
 (4, 4),
 (5, 5);
+INSERT INTO Users (UserID, Username, Password, Role)
+SELECT CustomerID, Name, Password, 'Customer'
+FROM Customer;
+INSERT INTO Users (UserID, Username, Password, Role)
+SELECT SupplierID + 10, Name, Password, 'Supplier'
+FROM Supplier;
+
+--update Cus and Sup
+ALTER TABLE Customer
+ADD Password VARCHAR(255);
+
+ALTER TABLE Supplier
+ADD Password VARCHAR(255);
+
+
+--Insert password data
+UPDATE Customer
+SET Password = '111111111'
+WHERE CustomerID = 1;
+
+UPDATE Customer
+SET Password = '222222222'
+WHERE CustomerID = 2;
+
+UPDATE Customer
+SET Password = '333333333'
+WHERE CustomerID = 3;
+
+UPDATE Customer
+SET Password = '444444444'
+WHERE CustomerID = 4;
+
+UPDATE Customer
+SET Password = '555555555'
+WHERE CustomerID = 5;
+
+UPDATE Supplier
+SET Password = '1'
+WHERE SupplierID = 1;
+
+UPDATE Supplier
+SET Password = '12'
+WHERE SupplierID = 2;
+
+UPDATE Supplier
+SET Password = '123'
+WHERE SupplierID = 3;
+
+UPDATE Supplier
+SET Password = '1234'
+WHERE SupplierID = 4;
+
+UPDATE Supplier
+SET Password = '12345'
+WHERE SupplierID = 5;
