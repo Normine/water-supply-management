@@ -144,7 +144,7 @@ public class login extends javax.swing.JFrame {
                 dispose();
             } else if (role.equalsIgnoreCase("Supplier")) {
                 JOptionPane.showMessageDialog(null, "Login successful! Supplier ID: " + id);
-                new supplierdhome().setVisible(true);
+                new supplierhome().setVisible(true);
                 dispose();
             }
         } else {

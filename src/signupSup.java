@@ -1,5 +1,6 @@
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class signupSup extends javax.swing.JFrame {
 
@@ -159,8 +160,19 @@ public class signupSup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
-        // TODO add your handling code here:
-        
+        String username = txtUsername.getText();
+        String password = new String(txtPass.getPassword());
+        String email = txtEmail.getText();
+        String address = txtAddress.getText();
+
+        String result = DBConnection.registerSup(username, password, email, address);
+
+        JOptionPane.showMessageDialog(null, result);
+
+        if (result.equals("User registered successfully!")) {
+            new supplierhome().setVisible(true);
+            dispose(); 
+        }     
     }//GEN-LAST:event_btnSignupActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

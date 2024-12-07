@@ -96,6 +96,41 @@ public class DBConnection {
         }
     }
         return "Database connection error.";
+    }
+public static String registerCus(String username, String password, String email, String address) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String[] results = new String[2];    
+        try {
+            con = DriverManager.getConnection(URL);  {
+                if (con != null) {
+                    String query = "INSERT INTO Customer (username, password, email, address) VALUES (?, ?, ?, ?)";
+                    stmt = con.prepareStatement(query);
+                    stmt.setString(1, username);
+                    stmt.setString(2, password);
+                    stmt.setString(3, email);
+                    stmt.setString(4, address);
+                    int rowsAffected = stmt.executeUpdate();
+                    if (rowsAffected > 0) {
+                        return "User registered successfully!";
+                    } else {
+                        return "Error during registration.";
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {   
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+            e.printStackTrace();
+            }
+        }
+        return "Database connection error.";
     }    
     public static String showSearchQuery(String queryTxt) {
         Connection con = null;
