@@ -139,4 +139,11 @@ public class options extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+    private static options instance;
+    public static synchronized options getInstance() {
+        if (instance == null) {
+            instance = new options();
+        }
+        return instance;
+    }
 }

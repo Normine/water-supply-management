@@ -10,8 +10,6 @@ public class signupSup extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
-
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -178,7 +176,23 @@ public class signupSup extends javax.swing.JFrame {
         txtEmail.setText("");
         txtAddress.setText("");
     }//GEN-LAST:event_btnResetActionPerformed
-
+    private static signupSup instance;
+    public static synchronized signupSup getInstance() {
+        if (instance == null) {
+            instance = new signupSup();
+        }
+        return instance;
+    }
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (isVisible()) {
+            txtUsername.setText("");
+            txtEmail.setText("");
+            txtPass.setText("");
+            txtAddress.setText("");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReset;

@@ -170,7 +170,23 @@ public class signupCus extends javax.swing.JFrame {
         txtEmail.setText("");
         txtAddress.setText("");
     }//GEN-LAST:event_btnResetActionPerformed
-
+    private static signupCus instance;
+        public static synchronized signupCus getInstance() {
+            if (instance == null) {
+                instance = new signupCus();
+            }
+            return instance;
+        }
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (isVisible()) {
+            txtUsername.setText("");
+            txtEmail.setText("");
+            txtPass.setText("");
+            txtAddress.setText("");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSignup;
