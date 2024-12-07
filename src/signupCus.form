@@ -66,12 +66,12 @@
                               <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtPasswordSignupCus" min="-2" pref="249" max="-2" attributes="0"/>
-                              <Component id="txtUsernameSignupCus" min="-2" pref="249" max="-2" attributes="0"/>
-                              <Component id="txtPhoneSignupCus" min="-2" pref="249" max="-2" attributes="0"/>
-                              <Component id="txtAddressSignupCus" min="-2" pref="249" max="-2" attributes="0"/>
-                              <Component id="txtEmailSignupCus" min="-2" pref="249" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtUsernameSignupCus" pref="249" max="32767" attributes="0"/>
+                              <Component id="txtPhoneSignupCus" pref="249" max="32767" attributes="0"/>
+                              <Component id="txtAddressSignupCus" pref="249" max="32767" attributes="0"/>
+                              <Component id="txtEmailSignupCus" pref="249" max="32767" attributes="0"/>
+                              <Component id="txtPass" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -98,7 +98,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPasswordSignupCus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPass" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -159,11 +159,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtUsernameSignupCus">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPasswordSignupCus">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordSignupCusActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="btnSignup">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sign Up"/>
@@ -198,6 +193,8 @@
         <Component class="javax.swing.JTextField" name="txtEmailSignupCus">
         </Component>
         <Component class="javax.swing.JTextField" name="txtPhoneSignupCus">
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtPass">
         </Component>
       </SubComponents>
     </Container>
