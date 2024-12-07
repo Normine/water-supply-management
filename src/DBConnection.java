@@ -25,19 +25,18 @@ public class DBConnection {
         try {
             con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            // Truy vấn SQL có 2 tham số
+
             String query = "SELECT * FROM Users WHERE Username = ? AND Password = ?";
             stmt = con.prepareStatement(query);
 
-            // Gán giá trị cho 2 tham số
             stmt.setString(1, username);
             stmt.setString(2, password);
 
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                results[0] = rs.getString("UserID"); // Lấy UserID từ kết quả
-                results[1] = rs.getString("Role");   // Lấy Role từ kết quả
+                results[0] = rs.getString("UserID"); 
+                results[1] = rs.getString("Role"); 
             }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -52,8 +51,6 @@ public class DBConnection {
         }
         return results;
     }
-
-
     public static String registerSup(String username, String password, String email, String address) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -124,20 +121,21 @@ public class DBConnection {
             }
         }
         return "Database connection error.";
-    }    
-    
+    }        
     public static String showSearchQuery(String queryTxt) {
         Connection con = null;
         PreparedStatement stmt;
         ResultSet rs;
         StringBuilder result = new StringBuilder();
         try {
-            con = DriverManager.getConnection(URL);
+            con = DriverManager.getConnection(URL);           
             String preparedQuery =
                     """
                             SELECT WR.Type, WR.Location, WR.Capacity, S.Name, S.Address, S.Rating, S.SupplyType 
-                            FROM WaterResource WR, Supplier S, Supplier_WaterResource SW 
-                            WHERE WR.ResourceID = SW.ResourceID AND SW.SupplierID = S.SupplierID AND S.Name = ? OR S.SupplyType =? """;
+                            FROM WaterResource WR
+                            JOIN Supplier_WaterResource SW ON WR.ResourceID = SW.ResourceID
+                            JOIN Supplier S ON S.SupplierID = SW.SupplierID
+                            WHERE S.Name = ?""";
             stmt = con.prepareStatement(preparedQuery);
             stmt.setString(1, queryTxt);
             rs = stmt.executeQuery();
