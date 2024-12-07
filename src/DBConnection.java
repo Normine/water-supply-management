@@ -15,53 +15,45 @@ public class DBConnection {
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
+
     public static String[] authenticateUser(String username, String password) {
-    Connection con = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
-    String[] results = new String[2];
-    
-    try {
-        con = DriverManager.getConnection(URL);       
-        String preparedQuery = 
-            """
-            SELECT 
-                CASE 
-                    WHEN U.Role = 'Customer' THEN C.CustomerID
-                    WHEN U.Role = 'Supplier' THEN S.SupplierID
-                    ELSE NULL 
-                END AS ID,
-                U.Role
-            FROM Users U
-            LEFT JOIN Customer C ON U.UserID = C.CustomerID AND U.Role = 'Customer'
-            LEFT JOIN Supplier S ON U.UserID = (S.SupplierID + 10) AND U.Role = 'Supplier'
-            WHERE U.Username = ? AND U.Password = ?
-            """;
-        
-        stmt = con.prepareStatement(preparedQuery);
-        stmt.setString(1, username);
-        stmt.setString(2, password);
-        
-        rs = stmt.executeQuery();
-        
-        if (rs.next()) {
-            results[0] = rs.getString("ID");
-            results[1] = rs.getString("Role");
-        }
-    } catch (SQLException e) {
-        System.out.print(e);
-        e.printStackTrace();
-    } finally {   
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String[] results = new String[2];
+
         try {
-            if (rs != null) rs.close();
-            if (stmt != null) stmt.close();
-            if (con != null) con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            // Truy vấn SQL có 2 tham số
+            String query = "SELECT * FROM Users WHERE Username = ? AND Password = ?";
+            stmt = con.prepareStatement(query);
+
+            // Gán giá trị cho 2 tham số
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                results[0] = rs.getString("UserID"); // Lấy UserID từ kết quả
+                results[1] = rs.getString("Role");   // Lấy Role từ kết quả
+            }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (rs != null) rs.close();
+                    if (stmt != null) stmt.close();
+                    if (con != null) con.close();
+                } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-    }
         return results;
     }
+
+
     public static String registerSup(String username, String password, String email, String address) {
         Connection con = null;
         PreparedStatement stmt = null;
@@ -97,7 +89,7 @@ public class DBConnection {
     }
         return "Database connection error.";
     }
-public static String registerCus(String username, String password, String email, String address) {
+    public static String registerCus(String username, String password, String email, String address) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -121,6 +113,7 @@ public static String registerCus(String username, String password, String email,
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println(e);
         } finally {   
             try {
                 if (rs != null) rs.close();
@@ -130,8 +123,9 @@ public static String registerCus(String username, String password, String email,
             e.printStackTrace();
             }
         }
-        return "Database connection error.";
+        return results;
     }    
+    
     public static String showSearchQuery(String queryTxt) {
         Connection con = null;
         PreparedStatement stmt;
@@ -141,8 +135,8 @@ public static String registerCus(String username, String password, String email,
             con = DriverManager.getConnection(URL);
             String preparedQuery =
                     """
-                            SELECT WR.Type, WR.Location, WR.Capacity, S.Name, S.Address, S.Rating, S.SupplyType
-                            FROM WaterResource WR, Supplier S, Supplier_WaterResource SW
+                            SELECT WR.Type, WR.Location, WR.Capacity, S.Name, S.Address, S.Rating, S.SupplyType 
+                            FROM WaterResource WR, Supplier S, Supplier_WaterResource SW 
                             WHERE WR.ResourceID = SW.ResourceID AND SW.SupplierID = S.SupplierID AND S.Name = ? OR S.SupplyType =? """;
             stmt = con.prepareStatement(preparedQuery);
             stmt.setString(1, queryTxt);
