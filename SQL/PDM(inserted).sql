@@ -1,25 +1,35 @@
+use WaterSupplyManagementSystemDatabase2
+go
 -- Entity: Supplier
 CREATE TABLE Supplier (
     SupplierID INT PRIMARY KEY,
+	UserID VARCHAR(20),
     Name VARCHAR(255),
+	Password VARCHAR(255),
     Address VARCHAR(255),
     Rating DECIMAL(3, 2),
     Email VARCHAR(255),
-    SupplyType VARCHAR(100)
+    SupplyType VARCHAR(100),	
 );
 
+alter table Supplier add FOREIGN KEY (UserID) REFERENCES Users(UserID)
+go
 -- Entity: Customer
 CREATE TABLE Customer (
     CustomerID INT PRIMARY KEY,
+	UserID VARCHAR(20),
     Name VARCHAR(255),
+	Password VARCHAR(255),
     Email VARCHAR(255),
-    Address VARCHAR(255)
-
+    Address VARCHAR(255),	
 );
---Entity: Users
+
+alter table Customer add FOREIGN KEY (UserID) REFERENCES Users(UserID)
+
+-- Entity: Users
 
 CREATE TABLE Users (
-    UserID INT PRIMARY KEY,
+    UserID VARCHAR(20) PRIMARY KEY,
     Username VARCHAR(255),
     Password VARCHAR(255),
     Role VARCHAR(50)
@@ -67,7 +77,6 @@ CREATE TABLE WaterConnection (
     CustomerID INT,
     ResourceID INT,
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
-    FOREIGN KEY (ResourceID) REFERENCES WaterResource(ResourceID)
 );
 
 -- Entity: Billing
@@ -76,6 +85,7 @@ CREATE TABLE Billing (
     CustomerID INT,
     Date DATE,
     Amount DECIMAL(10, 2),
+	Price DECIMAL(10, 2),
     PaymentStatus VARCHAR(50),
     ConnectionID INT,
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
@@ -110,25 +120,35 @@ CREATE TABLE WaterResource_WaterConnection (
 );
 
 
-ALTER TABLE Billing
-ADD Price DECIMAL(10, 2);
 UPDATE Billing
 SET Price = Amount * 0.95; -- Apply a 5% discount to the Amount
-
+go
 
 -- Insert data
-INSERT INTO Supplier (SupplierID, Name, Address, Rating, Email, SupplyType) VALUES
-(1, 'Aqua Vietnam', '123 Water Lane, Hanoi', 4.8, 'aquavietnam@gmail.com', 'Bottled Water'),
-(2, 'Hydro HCMC', '456 Stream Rd, HCMC', 4.5, 'hydrohcmc@yahoo.com', 'Water Filters'),
-(3, 'Mekong Suppliers', '789 Delta Ave, Can Tho', 4.7, 'mekong@gmail.com', 'Purifiers'),
-(4, 'Da Nang Waters', '101 Ocean St, Da Nang', 4.3, 'danang@gmail.com', 'Mineral Water'),
-(5, 'Hue Pure Water', '202 Perfume River Rd, Hue', 4.2, 'huepure@yahoo.com', 'Bottled Water');
-INSERT INTO Customer (CustomerID, Name, Email, Address) VALUES
-(1, 'Nguyen Van An', 'nguyenvanan@gmail.com', '123 Le Loi Street, Hanoi'),
-(2, 'Tran Thi Bao Phuc', 'tranthibaophuc@yahoo.com', '456 Nguyen Trai Street, HCMC'),
-(3, 'Le Hoang Cuong', 'lehoangcuong@web.com', '789 Vo Nguyen Giap St, Da Nang'),
-(4, 'Pham Minh Duong', 'phamminhduong@gmail.com', '101 Tran Phu Street, Hue'),
-(5, 'Nguyen Thi Chau', 'nguyenthichau@yahoo.com', '202 Le Thanh Ton St, Hanoi');
+INSERT INTO Users (UserID, Username, Password, Role) VALUES
+('S1', 'Aqua Vietnam','1', 'Supplier'),
+('S2', 'Hydro HCMC', '12', 'Supplier'),
+('S3', 'Mekong Suppliers', '123', 'Supplier'),
+('S4', 'Da Nang Waters', '1234', 'Supplier'),
+('S5', 'Hue Pure Water', '12345', 'Supplier'),
+('C1', 'Nguyen Van An', '1', 'Customer'),
+('C2', 'Tran Thi Bao Phuc', '12', 'Customer'),
+('C3', 'Le Hoang Cuong', '123', 'Customer'),
+( 'C4', 'Pham Minh Duong', '1234', 'Customer'),
+('C5', 'Nguyen Thi Chau', '12345', 'Customer');
+
+INSERT INTO Supplier (SupplierID, UserID, Name, Password, Address, Rating, Email, SupplyType) VALUES
+(1, 'S1', 'Aqua Vietnam', '1', '123 Water Lane, Hanoi', 4.8, 'aquavietnam@gmail.com', 'Bottled Water'),
+(2, 'S2', 'Hydro HCMC', '12', '456 Stream Rd, HCMC', 4.5, 'hydrohcmc@yahoo.com', 'Water Filters'),
+(3, 'S3', 'Mekong Suppliers', '123', '789 Delta Ave, Can Tho', 4.7, 'mekong@gmail.com', 'Purifiers'),
+(4, 'S4', 'Da Nang Waters', '1234', '101 Ocean St, Da Nang', 4.3, 'danang@gmail.com', 'Mineral Water'),
+(5, 'S5', 'Hue Pure Water', '12345', '202 Perfume River Rd, Hue', 4.2, 'huepure@yahoo.com', 'Bottled Water');
+INSERT INTO Customer (CustomerID, UserID, Name, Password, Email, Address) VALUES
+(1, 'C1', 'Nguyen Van An', '1', 'nguyenvanan@gmail.com', '123 Le Loi Street, Hanoi'),
+(2, 'C2', 'Tran Thi Bao Phuc', '12', 'tranthibaophuc@yahoo.com', '456 Nguyen Trai Street, HCMC'),
+(3, 'C3', 'Le Hoang Cuong', '123', 'lehoangcuong@web.com', '789 Vo Nguyen Giap St, Da Nang'),
+(4, 'C4', 'Pham Minh Duong', '1234', 'phamminhduong@gmail.com', '101 Tran Phu Street, Hue'),
+(5, 'C5', 'Nguyen Thi Chau', '12345', 'nguyenthichau@yahoo.com', '202 Le Thanh Ton St, Hanoi');
 INSERT INTO Orders (OrderID, Status, OrderDate, Quantity, SupplierID, CustomerID) VALUES
 (1, 'Completed', '2024-11-01', 20, 1, 1),
 (2, 'Pending', '2024-11-05', 15, 2, 2),
@@ -177,58 +197,3 @@ INSERT INTO WaterResource_WaterConnection (ResourceID, ConnectionID) VALUES
 (3, 3),
 (4, 4),
 (5, 5);
-INSERT INTO Users (UserID, Username, Password, Role)
-SELECT CustomerID, Name, Password, 'Customer'
-FROM Customer;
-INSERT INTO Users (UserID, Username, Password, Role)
-SELECT SupplierID + 10, Name, Password, 'Supplier'
-FROM Supplier;
-
---update Cus and Sup
-ALTER TABLE Customer
-ADD Password VARCHAR(255);
-
-ALTER TABLE Supplier
-ADD Password VARCHAR(255);
-
-
---Insert password data
-UPDATE Customer
-SET Password = '111111111'
-WHERE CustomerID = 1;
-
-UPDATE Customer
-SET Password = '222222222'
-WHERE CustomerID = 2;
-
-UPDATE Customer
-SET Password = '333333333'
-WHERE CustomerID = 3;
-
-UPDATE Customer
-SET Password = '444444444'
-WHERE CustomerID = 4;
-
-UPDATE Customer
-SET Password = '555555555'
-WHERE CustomerID = 5;
-
-UPDATE Supplier
-SET Password = '1'
-WHERE SupplierID = 1;
-
-UPDATE Supplier
-SET Password = '12'
-WHERE SupplierID = 2;
-
-UPDATE Supplier
-SET Password = '123'
-WHERE SupplierID = 3;
-
-UPDATE Supplier
-SET Password = '1234'
-WHERE SupplierID = 4;
-
-UPDATE Supplier
-SET Password = '12345'
-WHERE SupplierID = 5;
