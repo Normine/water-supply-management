@@ -2,13 +2,13 @@
 import javax.swing.JFrame;
 
 
-public class buying extends javax.swing.JFrame {
+public class customerhome extends javax.swing.JFrame {
 
  
-    public buying() {
+    public customerhome() {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Custumer Details");
+        setTitle("Buying");
         setSize(1045, 768);
         setLocationRelativeTo(null);
     }

@@ -22,9 +22,7 @@ public class DBConnection {
     String[] results = new String[2];
     
     try {
-        String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=YourDatabaseName;encrypt=true;trustServerCertificate=true;";
-        con = DriverManager.getConnection(connectionUrl, "your_username", "your_password");
-        
+        con = DriverManager.getConnection(URL);       
         String preparedQuery = 
             """
             SELECT 
@@ -65,4 +63,32 @@ public class DBConnection {
     }
         return results;
     }
+    public static String registerSup(String username, String password, String email, String address) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String[] results = new String[2];    
+        try {
+            con = DriverManager.getConnection(URL);  {
+                if (con != null) {
+                    String query = "INSERT INTO Supplier (username, password, email, address) VALUES (?, ?, ?, ?)";
+                    stmt = con.prepareStatement(query);
+                    stmt.setString(1, username);
+                    stmt.setString(2, password);
+                    stmt.setString(3, email);
+                    stmt.setString(4, address);
+                    int rowsAffected = stmt.executeUpdate();
+                    if (rowsAffected > 0) {
+                        return "User registered successfully!";
+                    } else {
+                        return "Error during registration.";
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Database connection error.";
+    }
+    
 }

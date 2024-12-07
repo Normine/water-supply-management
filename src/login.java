@@ -141,7 +141,7 @@ public class login extends javax.swing.JFrame {
             // Mở JFrame tương ứng dựa trên role
             if (role.equalsIgnoreCase("Customer")) {
                 JOptionPane.showMessageDialog(null, "Login successful! Customer ID: " + id);
-                new buying().setVisible(true);
+                new customerhome().setVisible(true);
                 dispose();
             } else if (role.equalsIgnoreCase("Supplier")) {
                 JOptionPane.showMessageDialog(null, "Login successful! Supplier ID: " + id);
