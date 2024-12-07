@@ -123,7 +123,7 @@ public class DBConnection {
             e.printStackTrace();
             }
         }
-        return results;
+        return "Database connection error.";
     }    
     
     public static String showSearchQuery(String queryTxt) {
