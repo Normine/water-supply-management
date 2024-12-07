@@ -2,10 +2,10 @@
 import javax.swing.JFrame;
 
 
-public class supplierdetails extends javax.swing.JFrame {
+public class supplierdhome extends javax.swing.JFrame {
 
 
-    public supplierdetails() {
+    public supplierdhome() {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Supplier Details");
