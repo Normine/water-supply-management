@@ -1,4 +1,4 @@
-create WaterSupplyManagementSystemDatabase
+create database WaterSupplyManagementSystemDatabase
 use WaterSupplyManagementSystemDatabase
 go
 -- Entity: Supplier
