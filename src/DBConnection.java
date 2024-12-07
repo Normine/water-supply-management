@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
     private static final String URL =  "jdbc:sqlserver://DESKTOP-PSPA667\\SQLEXPRESS:1433;"
-            + "databaseName=WaterSupplyManagementSystemDatabase2;"
+            + "databaseName=WaterSupplyManagementSystemDatabase;"
             + "encrypt=false;"
             + "trustServerCertificate=true;";;
     private static final String USERNAME = "sa"; // Thay bằng username SQL Server của bạn
@@ -51,8 +51,7 @@ public class DBConnection {
     } catch (SQLException e) {
         System.out.print(e);
         e.printStackTrace();
-    } finally {
-        // Đóng các kết nối
+    } finally {   
         try {
             if (rs != null) rs.close();
             if (stmt != null) stmt.close();
@@ -87,8 +86,59 @@ public class DBConnection {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {   
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return "Database connection error.";
     }
-    
+        return "Database connection error.";
+    }    
+    public static String showSearchQuery(String queryTxt) {
+        Connection con = null;
+        PreparedStatement stmt;
+        ResultSet rs;
+        StringBuilder result = new StringBuilder();
+        try {
+            con = DriverManager.getConnection(URL);
+            String preparedQuery =
+                    """
+                            SELECT WR.Type, WR.Location, WR.Capacity, S.Name, S.Address, S.Rating, S.SupplyType
+                            FROM WaterResource WR, Supplier S, Supplier_WaterResource SW
+                            WHERE WR.ResourceID = SW.ResourceID AND SW.SupplierID = S.SupplierID AND S.Name = ? OR S.SupplyType =? """;
+            stmt = con.prepareStatement(preparedQuery);
+            stmt.setString(1, queryTxt);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                result
+                        .append("Name: ")
+                        .append(rs.getString("S.Name"))
+                        .append("\n")
+                        .append(" Type: ")
+                        .append(rs.getString("WR.Type"))
+                        .append("\n")
+                        .append("Capacity: ")
+                        .append(rs.getString("WR.Capacity"))
+                        .append("\n")
+                        .append("Location:  ")
+                        .append(rs.getString("WR.Location"))
+                        .append("\n")
+                        .append("Address: ")
+                        .append(rs.getString("S.Address"))
+                        .append("\n")
+                        .append("Rating: ")
+                        .append(rs.getString("S.Rating"))
+                        .append("\n")
+                        .append("SupplyType: ")
+                        .append(rs.getString("S.SupplyType"))
+                        .append("\n");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result.toString();
+    }
 }
