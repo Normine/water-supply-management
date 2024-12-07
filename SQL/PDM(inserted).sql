@@ -1,4 +1,5 @@
-use WaterSupplyManagementSystemDatabase2
+create WaterSupplyManagementSystemDatabase
+use WaterSupplyManagementSystemDatabase
 go
 -- Entity: Supplier
 CREATE TABLE Supplier (
@@ -25,6 +26,7 @@ CREATE TABLE Customer (
 );
 
 alter table Customer add FOREIGN KEY (UserID) REFERENCES Users(UserID)
+GO
 
 -- Entity: Users
 
