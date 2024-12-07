@@ -185,7 +185,6 @@ public class signupCus extends javax.swing.JFrame {
         txtEmail.setText("");
         txtAddress.setText("");
     }//GEN-LAST:event_btnResetActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         new login().setVisible(true);

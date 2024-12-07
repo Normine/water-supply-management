@@ -158,7 +158,6 @@ public class signupSup extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
         String username = txtUsername.getText();
         String password = new String(txtPass.getPassword());
@@ -174,7 +173,6 @@ public class signupSup extends javax.swing.JFrame {
             dispose(); 
         }     
     }//GEN-LAST:event_btnSignupActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         new login().setVisible(true);
