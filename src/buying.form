@@ -113,11 +113,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
-                  <EmptySpace pref="55" max="32767" attributes="0"/>
-=======
                   <EmptySpace pref="63" max="32767" attributes="0"/>
->>>>>>> 0f84b5942f851fe9d2720218038d1fa6134f856e
               </Group>
           </Group>
         </DimensionLayout>
