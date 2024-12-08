@@ -10,7 +10,7 @@ public class customerhome extends javax.swing.JFrame {
     public customerhome() {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Buying");
+        setTitle("Customer Home");
         setSize(1000, 768);
         setLocationRelativeTo(null);
     }
