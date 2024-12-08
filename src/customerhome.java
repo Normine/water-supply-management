@@ -156,7 +156,7 @@ public class customerhome extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(
                     null,
-                    "Cannot find the disease with name: "
+                    "Cannot find the supplier with name: "
                         + txtSearch.getText()
                         + ". Please check your keyword again!",
                     "Warning",

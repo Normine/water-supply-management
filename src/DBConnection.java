@@ -136,7 +136,7 @@ public class DBConnection {
                 "FROM WaterResource WR " +
                 "JOIN Supplier_WaterResource SW ON WR.ResourceID = SW.ResourceID " +
                 "JOIN Supplier S ON S.SupplierID = SW.SupplierID " +
-                "WHERE S.Name = ?";
+                "WHERE LOWER(S.Name) = LOWER(?)";
 
             stmt = con.prepareStatement(preparedQuery);
             stmt.setString(1, queryTxt);
@@ -144,25 +144,25 @@ public class DBConnection {
             while (rs.next()) {
                 result
                         .append("Name: ")
-                        .append(rs.getString("S.Name"))
+                        .append(rs.getString("Name"))
                         .append("\n")
                         .append(" Type: ")
-                        .append(rs.getString("WR.Type"))
+                        .append(rs.getString("Type"))
                         .append("\n")
                         .append("Capacity: ")
-                        .append(rs.getString("WR.Capacity"))
+                        .append(rs.getString("Capacity"))
                         .append("\n")
                         .append("Location:  ")
-                        .append(rs.getString("WR.Location"))
+                        .append(rs.getString("Location"))
                         .append("\n")
                         .append("Address: ")
-                        .append(rs.getString("S.Address"))
+                        .append(rs.getString("Address"))
                         .append("\n")
                         .append("Rating: ")
-                        .append(rs.getString("S.Rating"))
+                        .append(rs.getString("Rating"))
                         .append("\n")
                         .append("SupplyType: ")
-                        .append(rs.getString("S.SupplyType"))
+                        .append(rs.getString("SupplyType"))
                         .append("\n");
             }
         } catch (SQLException e) {
