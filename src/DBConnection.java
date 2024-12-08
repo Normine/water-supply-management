@@ -3,6 +3,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class DBConnection {
     private static final String URL =  "jdbc:sqlserver://DESKTOP-PSPA667\\SQLEXPRESS:1433;"
@@ -167,5 +171,35 @@ public class DBConnection {
             throw new RuntimeException(e);
         }
         return result.toString();
+    }
+    
+    public static void loadData(JTable table) {
+        try {
+            // Create database connection
+            Connection connection = DriverManager.getConnection("your-database-url", "username", "password");
+
+            // Query to fetch data from the database
+            String query = "SELECT * FROM your_table";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            // Create a table model and set it to the JTable
+            DefaultTableModel model = new DefaultTableModel(new Object[]{"Column1", "Column2", "Column3"}, 0);
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("Column1"),
+                    rs.getString("Column2"),
+                    rs.getString("Column3")
+                });
+            }
+            table.setModel(model);
+
+            // Close the connection
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

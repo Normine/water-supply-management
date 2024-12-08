@@ -1,6 +1,7 @@
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 public class buying extends javax.swing.JFrame {
@@ -191,6 +192,7 @@ public class buying extends javax.swing.JFrame {
                 }
             };
             worker.execute();
+            	}
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnBuyingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyingActionPerformed
@@ -213,24 +215,56 @@ public class buying extends javax.swing.JFrame {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         btnBuying.setEnabled(false);
-        SwingWorker<Void, Void> worker =new SwingWorker<>() {
-            @Override
-            protected Void doInBackground() {
+        
+    SwingWorker<Void, Void> worker = new SwingWorker<>() {
+        @Override
+        protected Void doInBackground() {
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            SwingUtilities.invokeLater(() -> {
                 buying Buying = new buying();
                 Buying.setVisible(true);
                 setVisible(false);
-                return null;
-            }
-            @Override
-            protected void done() {
+
                 btnBuying.setEnabled(true);
-            }
-        };
-        worker.execute();
+            });
+        }
+    };
+
+    worker.execute(); // Start the worker
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
+            btnRefresh.setEnabled(false);
+
+    SwingWorker<Void, Void> worker = new SwingWorker<>() {
+        @Override
+        protected Void doInBackground() {
+            DBConnection.loadData(tbl);
+
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            btnRefresh.setEnabled(true);
+
+            SwingUtilities.invokeLater(() -> {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Data successfully refreshed!",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            });
+        }
+    };
+
+    worker.execute();
+       
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     public static void main(String args[]) {
