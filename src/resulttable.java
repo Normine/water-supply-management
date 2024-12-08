@@ -1,5 +1,7 @@
 
+import java.awt.HeadlessException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class resulttable extends javax.swing.JFrame {
@@ -14,7 +16,7 @@ public class resulttable extends javax.swing.JFrame {
 
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel10 = new javax.swing.JPanel();
@@ -89,7 +91,7 @@ public class resulttable extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnPost9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(txtQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,15 +126,60 @@ public class resulttable extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void btnPost9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPost9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPost9ActionPerformed
+    private void btnPost9ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:                                      
+    try {
+        String queryData = txtQuery.getText().trim();
+        if (queryData.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Query field is empty!", "Input Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    private void btnDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAllActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteAllActionPerformed
+        String response = DBConnection.insertData(queryData);
+
+        if ("Success".equals(response)) {
+            JOptionPane.showMessageDialog(this, "Data posted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            txtQuery.setText(""); // Clear the query input field after successful insert
+            refreshTable(); // Optional: Refresh the table with new data
+        } else {
+            JOptionPane.showMessageDialog(this, response, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (HeadlessException ex) {
+        JOptionPane.showMessageDialog(this, "An unexpected error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        ex.printStackTrace();
+    }
+
+    }                                        
+
+    private void btnDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:                                          
+    try {
+        int option = JOptionPane.showConfirmDialog(
+            this, 
+            "Are you sure you want to delete all records?", 
+            "Confirmation", 
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (option == JOptionPane.YES_OPTION) {
+            String response = DBConnection.deleteAll();
+
+            if ("Success".equals(response)) {
+                JOptionPane.showMessageDialog(this, "All data deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                refreshTable(); // Optional: Refresh table after deletion
+            } else {
+                JOptionPane.showMessageDialog(this, response, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    } catch (HeadlessException ex) {
+        JOptionPane.showMessageDialog(this, "An unexpected error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        ex.printStackTrace();
+    }
+
+    }                                            
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -166,32 +213,18 @@ public class resulttable extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnDeleteAll;
-    private javax.swing.JButton btnPost;
-    private javax.swing.JButton btnPost4;
-    private javax.swing.JButton btnPost5;
-    private javax.swing.JButton btnPost6;
-    private javax.swing.JButton btnPost7;
-    private javax.swing.JButton btnPost8;
     private javax.swing.JButton btnPost9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtQuery;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
+
+    private void refreshTable() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
