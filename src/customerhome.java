@@ -224,6 +224,7 @@ public class customerhome extends javax.swing.JFrame {
         };
         worker.execute();
     }//GEN-LAST:event_btnBuyingActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuying;
     private javax.swing.JButton btnLogout;

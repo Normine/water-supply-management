@@ -53,7 +53,7 @@ public class DBConnection {
         }
         return results;
     }
-    public static String registerSup(String username, String password, String email, String address) {
+    public static String registerSup(String name, String password, String email, String address) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -61,9 +61,9 @@ public class DBConnection {
         try {
             con = DriverManager.getConnection(URL);  {
                 if (con != null) {
-                    String query = "INSERT INTO Supplier (username, password, email, address) VALUES (?, ?, ?, ?)";
+                    String query = "INSERT INTO Supplier (name, password, email, address) VALUES (?, ?, ?, ?)";
                     stmt = con.prepareStatement(query);
-                    stmt.setString(1, username);
+                    stmt.setString(1, name);
                     stmt.setString(2, password);
                     stmt.setString(3, email);
                     stmt.setString(4, address);
@@ -88,7 +88,7 @@ public class DBConnection {
     }
         return "Database connection error.";
     }
-    public static String registerCus(String username, String password, String email, String address) {
+    public static String registerCus(String name, String password, String email, String address) {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -96,9 +96,9 @@ public class DBConnection {
         try {
             con = DriverManager.getConnection(URL);  {
                 if (con != null) {
-                    String query = "INSERT INTO Customer (username, password, email, address) VALUES (?, ?, ?, ?)";
+                    String query = "INSERT INTO Customer (name, password, email, address) VALUES (?, ?, ?, ?)";
                     stmt = con.prepareStatement(query);
-                    stmt.setString(1, username);
+                    stmt.setString(1, name);
                     stmt.setString(2, password);
                     stmt.setString(3, email);
                     stmt.setString(4, address);
