@@ -191,6 +191,7 @@ public class buying extends javax.swing.JFrame {
                 }
             };
             worker.execute();
+        }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnBuyingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyingActionPerformed
