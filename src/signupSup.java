@@ -6,7 +6,7 @@ public class signupSup extends javax.swing.JFrame {
 
     public signupSup() {
         initComponents();
-        setTitle("Login");
+        setTitle("Sign up Supplier");
         setSize(550, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

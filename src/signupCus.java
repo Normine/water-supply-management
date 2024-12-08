@@ -5,7 +5,7 @@ public class signupCus extends javax.swing.JFrame {
 
     public signupCus() {
         initComponents();
-        setTitle("Login");
+        setTitle("Sign up Customer");
         setSize(550, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

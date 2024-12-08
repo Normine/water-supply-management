@@ -25,10 +25,8 @@ public class DBConnection {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         String[] results = new String[2];
-
         try {
             con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-
 
             String query = "SELECT * FROM Users WHERE Username = ? AND Password = ?";
             stmt = con.prepareStatement(query);
@@ -133,13 +131,13 @@ public class DBConnection {
         StringBuilder result = new StringBuilder();
         try {
             con = DriverManager.getConnection(URL);           
-            String preparedQuery =
-                    """
-                            SELECT WR.Type, WR.Location, WR.Capacity, S.Name, S.Address, S.Rating, S.SupplyType 
-                            FROM WaterResource WR
-                            JOIN Supplier_WaterResource SW ON WR.ResourceID = SW.ResourceID
-                            JOIN Supplier S ON S.SupplierID = SW.SupplierID
-                            WHERE S.Name = ?""";
+            String preparedQuery =            
+                "SELECT WR.Type, WR.Location, WR.Capacity, S.Name, S.Address, S.Rating, S.SupplyType " +
+                "FROM WaterResource WR " +
+                "JOIN Supplier_WaterResource SW ON WR.ResourceID = SW.ResourceID " +
+                "JOIN Supplier S ON S.SupplierID = SW.SupplierID " +
+                "WHERE S.Name = ?";
+
             stmt = con.prepareStatement(preparedQuery);
             stmt.setString(1, queryTxt);
             rs = stmt.executeQuery();
