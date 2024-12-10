@@ -48,6 +48,7 @@ public class customerhome extends javax.swing.JFrame {
         jLabel1.setToolTipText("");
 
         txtResultArea.setColumns(20);
+        txtResultArea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtResultArea.setRows(5);
         jScrollPane2.setViewportView(txtResultArea);
 

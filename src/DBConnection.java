@@ -175,6 +175,7 @@ public class DBConnection {
         try {
             // Create database connection
             Connection connection = DriverManager.getConnection("your-database-url", "username", "password");
+            Connection connection = DriverManager.getConnection(URL);
 
             // Query to fetch data from the database
             String query = "SELECT * FROM your_table";

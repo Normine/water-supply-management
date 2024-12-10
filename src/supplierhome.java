@@ -1,11 +1,9 @@
-
 import java.awt.HeadlessException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
 public class supplierhome extends javax.swing.JFrame {
-
 
     public supplierhome() {
         initComponents();
@@ -14,7 +12,6 @@ public class supplierhome extends javax.swing.JFrame {
           setSize(1045, 768);
         setLocationRelativeTo(null);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
