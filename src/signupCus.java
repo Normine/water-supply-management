@@ -167,13 +167,21 @@ public class signupCus extends javax.swing.JFrame {
         String password = new String(txtPass.getPassword());
         String email = txtEmail.getText();
         String address = txtAddress.getText();
+        
+        System.out.println(username);        
+        System.out.println(password);
+        System.out.println(email);
+        System.out.println(address);
 
         String result = DBConnection.registerCus(username, password, email, address);
-
+            
+        String[] results2 = DBConnection.authenticateUser(username, password);
+        String id = results2[0];
+          String role = results2[1];
         JOptionPane.showMessageDialog(null, result);
-
+        
         if (result.equals("User registered successfully!")) {
-            new customerhome().setVisible(true);
+            new customerhome(id).setVisible(true);
             dispose(); 
         }        
     }//GEN-LAST:event_btnSignupActionPerformed
