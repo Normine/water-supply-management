@@ -130,20 +130,24 @@ public class login extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
     String username = txtUsername.getText();
     String password = new String(txtPassword.getPassword());
-    btnLogin.setEnabled(false);
+    System.out.println(username);
+    System.out.println(password);
+
+    btnLogin.setEnabled(true);
     String[] results = DBConnection.authenticateUser(username, password);
         
+            
         if (results[0] != null && results[1] != null) {
             String id = results[0];
             String role = results[1];
 
             if (role.equalsIgnoreCase("Customer")) {
                 JOptionPane.showMessageDialog(null, "Login successful! Customer ID: " + id);
-                new customerhome().setVisible(true);
+                new customerhome(id).setVisible(true);
                 dispose();
             } else if (role.equalsIgnoreCase("Supplier")) {
                 JOptionPane.showMessageDialog(null, "Login successful! Supplier ID: " + id);
-                new supplierhome().setVisible(true);
+                new supplierhome(id).setVisible(true);
                 dispose();
             }
         } else {
