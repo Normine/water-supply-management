@@ -167,9 +167,10 @@ public class signupSup extends javax.swing.JFrame {
         String result = DBConnection.registerSup(username, password, email, address);
 
         JOptionPane.showMessageDialog(null, result);
-
+        String [] results2 = DBConnection.authenticateUser(username, password);
+        String id = results2[0];
         if (result.equals("User registered successfully!")) {
-            new supplierhome().setVisible(true);
+            new supplierhome(id).setVisible(true);
             dispose(); 
         }     
     }//GEN-LAST:event_btnSignupActionPerformed
