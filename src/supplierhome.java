@@ -1,12 +1,15 @@
 
 import javax.swing.JFrame;
-
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 public class supplierhome extends javax.swing.JFrame {
+    private String id = "";
 
-
-    public supplierhome() {
+    public supplierhome(String id) {
+        this.id = id;
         initComponents();
+        customizeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Supplier Details");
           setSize(1045, 768);
@@ -29,13 +32,17 @@ public class supplierhome extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        txtUsername1 = new javax.swing.JTextField();
-        txtUsername2 = new javax.swing.JTextField();
-        txtUsername3 = new javax.swing.JTextField();
-        btnDelist = new javax.swing.JButton();
+        txtPhone = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
-        txtUsername4 = new javax.swing.JTextField();
+        txtSupplyType = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jSupplierName = new javax.swing.JLabel();
+        txtOrderID = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        btnUpdate1 = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +63,7 @@ public class supplierhome extends javax.swing.JFrame {
 
         txtResultArea1.setColumns(20);
         txtResultArea1.setRows(5);
+        txtResultArea1.setText("Hello world");
         jScrollPane3.setViewportView(txtResultArea1);
 
         btnDeleteAll.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -79,25 +87,22 @@ public class supplierhome extends javax.swing.JFrame {
         jLabel5.setText("Name:");
 
         txtUsername.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-
-        txtUsername1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-
-        txtUsername2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtUsername2.addActionListener(new java.awt.event.ActionListener() {
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsername2ActionPerformed(evt);
+                txtUsernameActionPerformed(evt);
             }
         });
 
-        txtUsername3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtPhone.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
-        btnDelist.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnDelist.setText("Delist");
-        btnDelist.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelistActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
+
+        txtAddress.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         btnUpdate.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnUpdate.setText("Update");
@@ -107,15 +112,44 @@ public class supplierhome extends javax.swing.JFrame {
             }
         });
 
-        txtUsername4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        txtUsername4.addActionListener(new java.awt.event.ActionListener() {
+        txtSupplyType.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtSupplyType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsername4ActionPerformed(evt);
+                txtSupplyTypeActionPerformed(evt);
             }
         });
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel6.setText("Emaill:");
+        jLabel6.setText("Email:");
+
+        jSupplierName.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jSupplierName.setText("Welcome back, ");
+
+        txtOrderID.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtOrderID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOrderIDActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel7.setText("Enter OrderID to establish Water Connection: ");
+
+        btnUpdate1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnUpdate1.setText("Establish Connection");
+        btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdate1ActionPerformed(evt);
+            }
+        });
+
+        btnLogout.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnLogout.setText("Log out");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,82 +157,104 @@ public class supplierhome extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtUsername3, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-                                .addComponent(txtUsername4)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(72, 72, 72)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtUsername2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-                                .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtUsername1)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(171, 171, 171)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDeleteAll, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDelist, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jSupplierName, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                                        .addComponent(txtSupplyType)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(72, 72, 72)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                                        .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtPhone)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(171, 171, 171)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(btnPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnDeleteAll, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(158, 158, 158))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSupplierName)
+                        .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtUsername2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtUsername1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(txtUsername3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(txtUsername4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSupplyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(95, 95, 95)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDeleteAll)
-                            .addComponent(btnDelist))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUpdate)
-                            .addComponent(btnPost)))
+                        .addComponent(btnDeleteAll))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
+                        .addGap(53, 53, 53)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnPost))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnUpdate1)
+                        .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(184, 184, 184))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -220,46 +276,143 @@ public class supplierhome extends javax.swing.JFrame {
 
     private void btnDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAllActionPerformed
         // TODO add your handling code here:
+        txtUsername.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
+        txtAddress.setText("");
+        txtSupplyType.setText("");
+
     }//GEN-LAST:event_btnDeleteAllActionPerformed
 
     private void btnPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostActionPerformed
         // TODO add your handling code here:
+        new resulttable(this.id).setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnPostActionPerformed
-
-    private void btnDelistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelistActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDelistActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+            String username= txtUsername.getText().trim();
+            String email= txtEmail.getText().trim();
+            String phone= txtPhone.getText().trim();
+            String address= txtAddress.getText().trim();
+            String supplyType= txtSupplyType.getText().trim();
+            String result = "";
+            if(!username.isEmpty() || !email.isEmpty() ||!phone.isEmpty() ||!address.isEmpty() ||!supplyType.isEmpty()){
+            if(!username.isEmpty()){
+            result = DBConnection.UpdateSupplierInformation("Name",username,this.id);
+            }
+             if(!email.isEmpty()){
+            result = DBConnection.UpdateSupplierInformation("Email",email,this.id);
+            }  if(!address.isEmpty()){
+             result = DBConnection.UpdateSupplierInformation("Address",address,this.id);
+            } if(!supplyType.isEmpty()){
+             result = DBConnection.UpdateSupplierInformation("SupplyType",supplyType,this.id);
+            }
+            JOptionPane.showMessageDialog(null, result);
+            }else{
+                 JOptionPane.showMessageDialog(
+                null, "Cannot update blank fields", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+             
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void txtUsername2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsername2ActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsername2ActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void txtUsername4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsername4ActionPerformed
+    private void txtSupplyTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSupplyTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsername4ActionPerformed
+    }//GEN-LAST:event_txtSupplyTypeActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
+        // TODO add your handling code here:
+        if(txtOrderID.getText().isEmpty()){
+              JOptionPane.showMessageDialog(
+                null, "OrderID cannot be empty", "Warning", JOptionPane.WARNING_MESSAGE);
+              return;
+        }
+        int orderID = Integer.parseInt(txtOrderID.getText());
+        DBConnection.establishWaterConnection(orderID, Integer.parseInt(this.id));
+        
+        
+    }//GEN-LAST:event_btnUpdate1ActionPerformed
+
+    private void txtOrderIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderIDActionPerformed
+        // TODO add your handling code here:
+           
+    }//GEN-LAST:event_txtOrderIDActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(
+            null,
+            "Are you sure you want to log out?",
+            "Confirm",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE);
+            if (option == JOptionPane.YES_OPTION) {
+                btnLogout.setEnabled(false);
+                SwingWorker<Void, Void> worker = new SwingWorker<>() {
+                @Override
+                protected Void doInBackground() {
+                    try {
+                    setVisible(false);
+                    JOptionPane.showMessageDialog(
+                    null,
+                    "Logged out successfully!",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+                    Thread.sleep(1000);
+                    login.getInstance().setVisible(true);
+                    setVisible(false);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    return null;
+                }
+                @Override
+                protected void done() {
+                    btnLogout.setEnabled(true);
+                }
+            };
+        worker.execute();
+    }
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteAll;
-    private javax.swing.JButton btnDelist;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPost;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnUpdate1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea txtResultArea1;
+    private javax.swing.JLabel jSupplierName;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtOrderID;
+    private javax.swing.JTextField txtPhone;
+    public javax.swing.JTextArea txtResultArea1;
+    private javax.swing.JTextField txtSupplyType;
     private javax.swing.JTextField txtUsername;
-    private javax.swing.JTextField txtUsername1;
-    private javax.swing.JTextField txtUsername2;
-    private javax.swing.JTextField txtUsername3;
-    private javax.swing.JTextField txtUsername4;
     // End of variables declaration//GEN-END:variables
+
+private void customizeComponents() {
+       String orders = DBConnection.getOrders(id);
+       String supplierName = DBConnection.getSupplierName(id);
+    txtResultArea1.setText("Here is the list of your orders: "+ "\n"+ "\n"+ orders);
+    jSupplierName.setText("Welcom back, "+ supplierName);
+}
 }
